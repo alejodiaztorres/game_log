@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre del juego:</strong>
+  <%= @game.name %>
+</p>
+
+<p>
+  <strong>Reglas:</strong>
+  <%= @game.rule %>
+</p>
+
+<p>
+  <strong>Reglas en pdf:</strong>
+  <% @game.rules %>
+    <a href="<%= rails_blob_path(@game.rules, disposition: "attachment") %>"><u>Reglas</u></a>
+</p>
+
+<p>
+  <strong>Tablero</strong>
+  <div class="form-group">
+      <% if @game.box.attached? %>
+        <%= image_tag @game.box, style: "-webkit-filter: grayscale(100%) height:150px;width:150px" %>
+      <% end %>
+  </div>
+</p>
+
+<p>
+  <strong>Piezas</strong>
+    <div class="form-group">
+      <% if @game.images.attached? %>
+        <% @game.images.each do |image| %>
+          <%= image_tag image, style: "-webkit-filter: grayscale(100%) height:150px;width:150px" %>
+        <% end %>
+      <% end %>
+    </div>
+</p>
+
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>
